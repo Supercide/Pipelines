@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Pipelines.Tests.Pipelines;
 
 namespace Pipelines.Tests
 {

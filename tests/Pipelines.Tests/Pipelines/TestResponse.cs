@@ -1,4 +1,4 @@
-﻿namespace Pipelines.Tests
+﻿namespace Pipelines.Tests.Pipelines
 {
     public class TestResponse
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pipelines.Tests
+namespace Pipelines.Tests.Pipelines
 {
     public class TestMutationHandler : PipelineMutationDefinition<TestRequestA, TestRequestB, TestResponse>
     {

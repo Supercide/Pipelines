@@ -1,4 +1,5 @@
 ﻿using System;
+using Pipelines.Tests.Pipelines;
 
 namespace Pipelines.Tests
 {

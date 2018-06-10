@@ -82,7 +82,7 @@ namespace Pipelines
         /// returns the pipeline
         /// </summary>
         /// <returns></returns>
-        public PipelineDefinition<TRoot, TResponse> Build()
+        public IRequestHandler<TRoot, TResponse> Build()
         {
             return _root as PipelineDefinition<TRoot, TResponse>;
         }
