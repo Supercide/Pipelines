@@ -15,10 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		appveryor.yml = appveryor.yml
+		appveyor.yml = appveyor.yml
 		build.cake = build.cake
 		build.ps1 = build.ps1
-		LICENSEx.x = LICENSEx.x
+		LICENSE = LICENSE
+		Logo.png = Logo.png
 	EndProjectSection
 EndProject
 Global
