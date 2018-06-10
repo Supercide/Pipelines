@@ -12,7 +12,9 @@ deploy:
   api_key:
     secure: qbxnPvOYuLuYydN+Nea89J3iQEoVvmzyPKKMqa0DEtorWHYJTlS9cvLXvZsLBlMM
   skip_symbols: false
-  artifact: '.\artifacts\*.nupkg'
+
+artifacts:
+- path: '.\artifacts\*.nupkg'
 
 on_failure:
   - ps: $env:version="$($env:version)-failed"
