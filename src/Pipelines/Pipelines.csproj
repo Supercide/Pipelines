@@ -12,7 +12,7 @@
         <RepositoryUrl>https://github.com/Supercide/Pipelines</RepositoryUrl>
         <PackageProjectUrl>https://github.com/Supercide/Pipelines</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/Supercide/Pipelines/blob/master/LICENSE</PackageLicenseUrl>
-        <PackageIconUrl>../../Logo.png</PackageIconUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/Supercide/Pipelines/master/Logo.png</PackageIconUrl>
         <Description>Allows for creation of processing pipelines</Description>
         <PackageReleaseNotes>Initial release</PackageReleaseNotes>
         <PackageTags>Pipelines, SRP</PackageTags>
