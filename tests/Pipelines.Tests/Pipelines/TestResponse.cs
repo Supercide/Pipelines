@@ -1,4 +1,4 @@
-﻿namespace Pipelines.Tests.Pipelines
+﻿namespace Anderson.Pipelines.Tests.Pipelines
 {
     public class TestResponse
     {

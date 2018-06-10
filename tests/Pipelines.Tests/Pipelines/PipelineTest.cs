@@ -1,6 +1,7 @@
 ﻿using System.Linq;
+using Anderson.Pipelines.Builders;
+using Anderson.Pipelines.Tests.Pipelines;
 using NUnit.Framework;
-using Pipelines.Tests.Pipelines;
 
 namespace Pipelines.Tests
 {

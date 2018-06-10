@@ -1,6 +1,7 @@
 ﻿using System;
+using Anderson.Pipelines.Definitions;
 
-namespace Pipelines.Tests.Pipelines
+namespace Anderson.Pipelines.Tests.Pipelines
 {
     public class TestMutationHandler : PipelineMutationDefinition<TestRequestA, TestRequestB, TestResponse>
     {

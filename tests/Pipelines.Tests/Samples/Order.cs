@@ -1,4 +1,4 @@
-﻿namespace Pipelines.Tests.Samples
+﻿namespace Anderson.Pipelines.Tests.Samples
 {
     public class Order
     {

@@ -1,5 +1,6 @@
 ﻿using System;
-using Pipelines.Tests.Pipelines;
+using Anderson.Pipelines.Definitions;
+using Anderson.Pipelines.Tests.Pipelines;
 
 namespace Pipelines.Tests
 {

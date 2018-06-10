@@ -1,5 +1,9 @@
 ﻿
-namespace Pipelines
+using Anderson.Pipelines.Definitions;
+using Anderson.Pipelines.Handlers;
+using Pipelines;
+
+namespace Anderson.Pipelines.Builders
 {
     /// <summary>
     /// Helps define your pipeline
