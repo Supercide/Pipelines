@@ -9,5 +9,9 @@
         <PreserveCompilationContext>true</PreserveCompilationContext>
         <AssemblyName>Pipelines</AssemblyName>
         <PackageId>Anderson.Pipelines</PackageId>
+        <RepositoryUrl>https://github.com/Supercide/Pipelines</RepositoryUrl>
+        <PackageLicenseUrl>https://github.com/Supercide/Pipelines/LICENSE</PackageLicenseUrl>
+        <Description>Allows for creation of processing pipelines</Description>
+        <PackageTags>Pipelines, SRP</PackageTags>
     </PropertyGroup>
 </Project>

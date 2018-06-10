@@ -1,0 +1,40 @@
+version: 0.1.1
+
+os: Visual Studio 2017
+
+test: off
+
+build_script:
+  - ps: .\build.ps1 -ScriptArgs '-buildVersion="$($env:version)"'
+
+deploy:
+  provider: NuGet
+  api_key:
+    secure: qbxnPvOYuLuYydN+Nea89J3iQEoVvmzyPKKMqa0DEtorWHYJTlS9cvLXvZsLBlMM
+  skip_symbols: false
+  artifact: '.\artifacts\*.nupkg'
+
+on_failure:
+  - ps: $env:version="$($env:version)-failed"
+
+on_finish:
+  - ps: Update-AppveyorBuild -Version "$($env:version)"
+  - ps: $wc = New-Object 'System.Net.WebClient'
+  - ps: Resolve-Path .\artifacts\**\*.trx | ForEach-Object { $wc.UploadFile("https://ci.appveyor.com/api/testresults/mstest/$($env:APPVEYOR_JOB_ID)", $_) }
+
+for:
+  -
+    branches:
+      only:
+        - master
+
+    install:
+      - ps: $env:version="$($env:APPVEYOR_BUILD_VERSION)"
+  -
+    branches:
+      except:
+        - master
+
+    install:
+      - ps: $env:version="$($env:APPVEYOR_BUILD_VERSION).$($env:APPVEYOR_BUILD_NUMBER)-$($env:APPVEYOR_REPO_BRANCH)"
+      - ps: Update-AppveyorBuild -Version "$($env:version)"
