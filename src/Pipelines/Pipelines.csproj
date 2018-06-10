@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Version>$(buildVersion)</Version>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Authors>Jordan Anderson</Authors>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <AssemblyName>Pipelines</AssemblyName>
+        <PackageId>Anderson.Pipelines</PackageId>
+    </PropertyGroup>
+</Project>
