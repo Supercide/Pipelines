@@ -5,7 +5,7 @@ os: Visual Studio 2017
 test: off
 
 build_script:
-  - ps: .\build.ps1 -ScriptArgs '-buildVersion="$($env:version)"'
+  - ps: .\build.ps1 -buildVersion="$($env:version)"
 
 deploy:
   provider: NuGet
