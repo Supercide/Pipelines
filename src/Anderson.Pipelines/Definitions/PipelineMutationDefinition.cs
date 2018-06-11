@@ -1,5 +1,4 @@
 ﻿using Anderson.Pipelines.Handlers;
-using Pipelines;
 
 namespace Anderson.Pipelines.Definitions
 {

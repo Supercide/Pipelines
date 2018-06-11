@@ -1,6 +1,4 @@
-﻿using Pipelines;
-
-namespace Anderson.Pipelines.Handlers
+﻿namespace Anderson.Pipelines.Handlers
 {
     public interface IInnerHandler<TRequest, TResponse>
     {
