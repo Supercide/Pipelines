@@ -1,4 +1,6 @@
-﻿namespace Pipelines
+﻿using Anderson.Pipelines.Handlers;
+
+namespace Anderson.Pipelines.Definitions
 {
     public abstract class PipelineDefinition<TRequest, TResponse> 
         : IRequestHandler<TRequest, TResponse>, 

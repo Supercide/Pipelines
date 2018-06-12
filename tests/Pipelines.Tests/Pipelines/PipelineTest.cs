@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using Anderson.Pipelines.Builders;
 using NUnit.Framework;
-using Pipelines.Tests.Pipelines;
 
-namespace Pipelines.Tests
+namespace Anderson.Pipelines.Tests.Pipelines
 {
     public class PipelineTest
     {

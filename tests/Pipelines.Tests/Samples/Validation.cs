@@ -1,6 +1,7 @@
-﻿using Pipelines.Responses;
+﻿using Anderson.Pipelines.Definitions;
+using Anderson.Pipelines.Responses;
 
-namespace Pipelines.Tests.Samples
+namespace Anderson.Pipelines.Tests.Samples
 {
     public class Validation : PipelineDefinition<Order, Response<OrderDispatched, OrderError>>
     {

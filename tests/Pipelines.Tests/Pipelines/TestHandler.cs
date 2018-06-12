@@ -1,7 +1,7 @@
 ﻿using System;
-using Pipelines.Tests.Pipelines;
+using Anderson.Pipelines.Definitions;
 
-namespace Pipelines.Tests
+namespace Anderson.Pipelines.Tests.Pipelines
 {
     public class TestHandler<TRequest> : PipelineDefinition<TRequest, TestResponse> {
         public TRequest _request;

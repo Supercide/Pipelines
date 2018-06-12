@@ -1,7 +1,8 @@
-﻿using NUnit.Framework;
-using Pipelines.Responses;
+﻿using Anderson.Pipelines.Builders;
+using Anderson.Pipelines.Responses;
+using NUnit.Framework;
 
-namespace Pipelines.Tests.Samples
+namespace Anderson.Pipelines.Tests.Samples
 {
     public class SampleTest
     {
