@@ -14,7 +14,7 @@
         <PackageLicenseUrl>https://github.com/Supercide/Pipelines/blob/master/LICENSE</PackageLicenseUrl>
         <PackageIconUrl>https://raw.githubusercontent.com/Supercide/Pipelines/master/Logo.png</PackageIconUrl>
         <Description>Allows for creation of processing pipelines</Description>
-        <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+        <PackageReleaseNotes>Adds support for Dependency injection</PackageReleaseNotes>
         <PackageTags>Pipelines, SRP</PackageTags>
     </PropertyGroup>
 </Project>
