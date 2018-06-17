@@ -3,6 +3,10 @@ using Anderson.Pipelines.Definitions;
 
 namespace Anderson.Pipelines.Tests.Pipelines
 {
+    public class TestHandlerA<TRequest> : TestHandler<TRequest> { }
+    public class TestHandlerB<TRequest> : TestHandler<TRequest> { }
+    public class TestHandlerC<TRequest> : TestHandler<TRequest> { }
+
     public class TestHandler<TRequest> : PipelineDefinition<TRequest, TestResponse> {
         public TRequest _request;
         public DateTime _timestamp;
@@ -13,10 +17,12 @@ namespace Anderson.Pipelines.Tests.Pipelines
 
             if (InnerHandler != null)
             {
-                return InnerHandler.Handle(request);
+                InnerHandler.Handle(request);
             }
 
             return new TestResponse();
         }
     }
+
+
 }
