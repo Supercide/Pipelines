@@ -13,7 +13,7 @@ namespace Anderson.Pipelines.Tests.Pipelines
             var testHandlerB = new TestHandler<TestRequestA>();
             var testHandlerC = new TestHandler<TestRequestA>();
             
-            var pipeline = PipelineDefinitionBuilder<TestRequestA, TestResponse>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(testHandlerA)
                 .ThenWith(testHandlerB)
                 .ThenWith(testHandlerC)
@@ -37,7 +37,7 @@ namespace Anderson.Pipelines.Tests.Pipelines
             var testHandlerB = new TestHandler<TestRequestA>();
             var testHandlerC = new TestHandler<TestRequestA>();
 
-            var pipeline = PipelineDefinitionBuilder<TestRequestA, TestResponse>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(testHandlerA)
                 .ThenWith(testHandlerB)
                 .ThenWith(testHandlerC)
@@ -72,7 +72,7 @@ namespace Anderson.Pipelines.Tests.Pipelines
             var testHandlerC = new TestHandler<TestRequestB>();
 
 
-            var pipeline = PipelineDefinitionBuilder<TestRequestA, TestResponse>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(testHandlerA)
                 .ThenWith(testHandlerB)
                 .ThenWithMutation(testMutationHandler)

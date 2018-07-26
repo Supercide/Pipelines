@@ -22,9 +22,9 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 [typeof(TestHandlerC<TestRequestA>)] = testHandlerC,
             };
 
-            PipelineDefinitionBuilder<TestRequestA, TestResponse> builder = new PipelineDefinitionBuilder<TestRequestA, TestResponse>(type => dictionary[type]);
+            PipelineDefinitionBuilder builder = new PipelineDefinitionBuilder(type => dictionary[type]);
             
-            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>>()
+            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>, TestRequestA, TestResponse>()
                                   .ThenWith<TestHandlerB<TestRequestA>>()
                                   .ThenWith<TestHandlerC<TestRequestA>>()
                                   .Build();
@@ -54,10 +54,10 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 [typeof(TestHandlerC<TestRequestA>)] = testHandlerC,
             };
 
-            PipelineDefinitionBuilder<TestRequestA, TestResponse> builder = new
-                PipelineDefinitionBuilder<TestRequestA, TestResponse>(type => dictionary[type]);
+            PipelineDefinitionBuilder builder = new
+                PipelineDefinitionBuilder(type => dictionary[type]);
 
-            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>>()
+            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>, TestRequestA, TestResponse>()
                 .ThenWith<TestHandlerB<TestRequestA>>()
                 .ThenWith<TestHandlerC<TestRequestA>>()
                 .Build();
@@ -98,11 +98,11 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 [typeof(TestMutationHandler)] = testMutationHandler,
             };
 
-            PipelineDefinitionBuilder<TestRequestA, TestResponse> builder = new
-                PipelineDefinitionBuilder<TestRequestA, TestResponse>(type => dictionary[type]);
+            PipelineDefinitionBuilder builder = new
+                PipelineDefinitionBuilder(type => dictionary[type]);
 
 
-            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>>()
+            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>, TestRequestA, TestResponse> ()
                 .ThenWith<TestHandlerB<TestRequestA>>()
                 .ThenWithMutation<TestMutationHandler, TestRequestB>()
                 .ThenWith<TestHandlerC<TestRequestB>>()

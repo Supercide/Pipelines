@@ -8,9 +8,7 @@ namespace Anderson.Pipelines.Builders
     /// <summary>
     /// Helps define your pipeline
     /// </summary>
-    /// <typeparam name="TRoot">This is the Root node that starts the pipeline</typeparam>
-    /// <typeparam name="TResponse">The response which the pipeline produces</typeparam>
-    public class PipelineDefinitionBuilder<TRoot, TResponse>
+    public class PipelineDefinitionBuilder
     {
         private readonly Func<Type, object> _resolveService;
 
@@ -30,7 +28,7 @@ namespace Anderson.Pipelines.Builders
         /// </summary>
         /// <param name="rootDefinition"></param>
         /// <returns></returns>
-        public static PipelineDefinitionBuilder<TRoot, TRoot, TResponse> StartWith(
+        public static PipelineDefinitionBuilder<TRoot, TRoot, TResponse> StartWith<TRoot, TResponse>(
             PipelineDefinition<TRoot, TResponse> rootDefinition)
         {
             return new PipelineDefinitionBuilder<TRoot, TRoot, TResponse>(rootDefinition)
@@ -43,11 +41,11 @@ namespace Anderson.Pipelines.Builders
         /// The initial node that begins the pipeline
         /// </summary>
         /// <returns></returns>
-        public PipelineDefinitionBuilder<TRoot, TRoot, TResponse> StartWith<T>() where T : PipelineDefinition<TRoot, TResponse>
+        public PipelineDefinitionBuilder<TRequest, TRequest, TResponse> StartWith<TPipe, TRequest, TResponse>() where TPipe : PipelineDefinition<TRequest, TResponse>
         {
-            PipelineDefinition<TRoot, TResponse> pipe = (PipelineDefinition<TRoot, TResponse>) _resolveService(typeof(T));
+            PipelineDefinition<TRequest, TResponse> pipe = (PipelineDefinition<TRequest, TResponse>) _resolveService(typeof(TPipe));
 
-            return new PipelineDefinitionBuilder<TRoot, TRoot, TResponse>(pipe, _resolveService)
+            return new PipelineDefinitionBuilder<TRequest, TRequest, TResponse>(pipe, _resolveService)
             {
                 _root = pipe
             };

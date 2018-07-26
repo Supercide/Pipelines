@@ -9,7 +9,7 @@ namespace Anderson.Pipelines.Tests.Samples
         [Test]
         public void GivenValidOrder_WhenHandlingOrder_ThenOrderDispatchedIsReturned()
         {
-            var pipeline = PipelineDefinitionBuilder<Order, Response<OrderDispatched, OrderError>>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(new Validation())
                 .ThenWith(new OrderDispatchedHandler())
                 .Build();
@@ -28,7 +28,7 @@ namespace Anderson.Pipelines.Tests.Samples
         [Test]
         public void GivenOrder_WithMissingAddress_WhenHandlingOrder_ThenReturnsOrderValidationError()
         {
-            var pipeline = PipelineDefinitionBuilder<Order, Response<OrderDispatched, OrderError>>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(new Validation())
                 .ThenWith(new OrderDispatchedHandler())
                 .Build();
