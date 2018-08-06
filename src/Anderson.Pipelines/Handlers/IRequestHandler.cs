@@ -1,7 +1,11 @@
-﻿namespace Anderson.Pipelines.Handlers
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Anderson.Pipelines.Definitions;
+
+namespace Anderson.Pipelines.Handlers
 {
-    public interface IRequestHandler<in TRequest, out TResponse>
+    public interface IRequestHandler<in TRequest>
     {
-        TResponse Handle(TRequest request);
+        Task HandleAsync(TRequest request, Context context, CancellationToken token = default(CancellationToken));
     }
 }

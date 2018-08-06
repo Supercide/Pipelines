@@ -1,12 +1,14 @@
-﻿using Anderson.Pipelines.Handlers;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Anderson.Pipelines.Handlers;
 
 namespace Anderson.Pipelines.Definitions
 {
-    public abstract class PipelineDefinition<TRequest, TResponse> 
-        : IRequestHandler<TRequest, TResponse>, 
-          IInnerHandler<TRequest, TResponse>
+    public abstract class PipelineDefinition<TRequest> 
+        : IRequestHandler<TRequest>, 
+          IInnerHandler<TRequest>
     {
-        public IRequestHandler<TRequest, TResponse> InnerHandler { get; set; }
-        public abstract TResponse Handle(TRequest request);
+        public IRequestHandler<TRequest> InnerHandler { get; set; }
+        public abstract Task HandleAsync(TRequest request, Context context, CancellationToken token = default(CancellationToken));
     }
 }

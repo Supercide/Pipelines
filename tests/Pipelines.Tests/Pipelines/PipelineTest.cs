@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using Anderson.Pipelines.Builders;
+using Anderson.Pipelines.Definitions;
+using Anderson.Pipelines.Responses;
 using NUnit.Framework;
 
 namespace Anderson.Pipelines.Tests.Pipelines
@@ -20,8 +22,8 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 .Build();
 
             var testRequest = new TestRequestA();
-
-            pipeline.Handle(testRequest);
+            var context = new Context();
+            pipeline.HandleAsync(testRequest, context);
             Assert.Multiple(() =>
             {
                 Assert.That(testHandlerA._request, Is.EqualTo(testRequest));
@@ -44,8 +46,8 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 .Build();
 
             var testRequest = new TestRequestA();
-
-            pipeline.Handle(testRequest);
+            var context = new Context();
+            pipeline.HandleAsync(testRequest, context);
 
             var callOrder = new[]
                 {
@@ -80,8 +82,8 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 .Build();
 
             var testRequest = new TestRequestA();
-
-            pipeline.Handle(testRequest);
+            var context = new Context();
+            pipeline.HandleAsync(testRequest, context);
 
             Assert.Multiple(() =>
             {
