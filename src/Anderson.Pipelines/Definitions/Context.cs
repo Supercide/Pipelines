@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Anderson.Pipelines.Responses;
 
 namespace Anderson.Pipelines.Definitions
@@ -6,32 +8,35 @@ namespace Anderson.Pipelines.Definitions
 
     public class Context : Dictionary<string, object>
     {
-        public bool HasError => this.ContainsKey(WellKnownContextKeys.Error);
+        private readonly Dictionary<Type, object> _response;
+        private readonly Dictionary<Type, object> _errors;
 
-        public void SetResponse(object response)
+        public Context()
         {
-            this[WellKnownContextKeys.Response] = response;
+            _response = new Dictionary<Type, object>();
+            _errors = new Dictionary<Type, object>();
         }
 
-        public void SetError(object error)
+        public bool HasError => _errors.Any();
+
+        public void SetResponse<TResponse>(TResponse response)
         {
-            this[WellKnownContextKeys.Error] = error;
+            _response[typeof(TResponse)] = response;
+        }
+
+        public void SetError<TError>(TError error)
+        {
+            _errors[typeof(TError)] = error;
         }
 
         public TError GetError<TError>()
         {
-            return (TError) this[WellKnownContextKeys.Error];
+            return (TError) _errors[typeof(TError)];
         }
 
         public TResponse GetResponse<TResponse>()
         {
-            return (TResponse)this[WellKnownContextKeys.Response];
+            return (TResponse) _response[typeof(TResponse)];
         }
-    }
-
-    public class WellKnownContextKeys
-    {
-        public const string Response = "Response";
-        public static string Error = "Error";
     }
 }
