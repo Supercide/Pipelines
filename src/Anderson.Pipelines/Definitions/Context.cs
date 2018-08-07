@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Anderson.Pipelines.Responses;
@@ -27,6 +28,26 @@ namespace Anderson.Pipelines.Definitions
         public void SetError<TError>(TError error)
         {
             _errors[typeof(TError)] = error;
+        }
+
+        public bool ContainsError<TError>()
+        {
+            return _errors.ContainsKey(typeof(TError));
+        }
+
+        public IEnumerable GetAllErrors()
+        {
+            return _errors.Select(x => x.Value);
+        }
+
+        public bool ContainsResponse<TResponse>()
+        {
+            return _response.ContainsKey(typeof(TResponse));
+        }
+
+        public IEnumerable GetAllResponses()
+        {
+            return _response.Select(x => x.Value);
         }
 
         public TError GetError<TError>()
