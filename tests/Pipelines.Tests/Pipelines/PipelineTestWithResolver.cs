@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Anderson.Pipelines.Builders;
-using Anderson.Pipelines.Definitions;
+using Andersoft.Pipelines.Builders;
+using Andersoft.Pipelines.Definitions;
 using NUnit.Framework;
 
-namespace Anderson.Pipelines.Tests.Pipelines
+namespace Andersoft.Pipelines.Tests.Pipelines
 {
     public class PipelineTestWithResolver
     {

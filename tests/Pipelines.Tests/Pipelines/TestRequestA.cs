@@ -1,4 +1,4 @@
-﻿namespace Anderson.Pipelines.Tests.Pipelines
+﻿namespace Andersoft.Pipelines.Tests.Pipelines
 {
     public class TestRequestA
     {

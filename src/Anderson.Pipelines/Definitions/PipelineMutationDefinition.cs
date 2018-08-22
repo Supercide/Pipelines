@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Anderson.Pipelines.Handlers;
+using Andersoft.Pipelines.Handlers;
 
-namespace Anderson.Pipelines.Definitions
+namespace Andersoft.Pipelines.Definitions
 {
     public abstract class PipelineMutationDefinition<TRequest, TMutatedRequest> 
         : IRequestHandler<TRequest>, 

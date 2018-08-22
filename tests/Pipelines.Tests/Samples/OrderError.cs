@@ -1,4 +1,4 @@
-﻿namespace Anderson.Pipelines.Tests.Samples
+﻿namespace Andersoft.Pipelines.Tests.Samples
 {
     public enum OrderError
     {

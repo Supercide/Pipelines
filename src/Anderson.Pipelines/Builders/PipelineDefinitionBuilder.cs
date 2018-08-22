@@ -1,9 +1,8 @@
-﻿
-using System;
-using Anderson.Pipelines.Definitions;
-using Anderson.Pipelines.Handlers;
+﻿using System;
+using Andersoft.Pipelines.Definitions;
+using Andersoft.Pipelines.Handlers;
 
-namespace Anderson.Pipelines.Builders
+namespace Andersoft.Pipelines.Builders
 {
     /// <summary>
     /// Helps define your pipeline

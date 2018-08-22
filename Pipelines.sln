@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anderson.Pipelines", "src\Anderson.Pipelines\Anderson.Pipelines.csproj", "{7F0F6B95-5216-49B7-9A39-D5E9D7BB5F0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andersoft.Pipelines", "src\Anderson.Pipelines\Andersoft.Pipelines.csproj", "{7F0F6B95-5216-49B7-9A39-D5E9D7BB5F0B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anderson.Pipelines.Tests", "tests\Pipelines.Tests\Anderson.Pipelines.Tests.csproj", "{C6FCDE5B-2910-4FBD-81E4-2DEEB3133C11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Andersoft.Pipelines.Tests", "tests\Pipelines.Tests\Andersoft.Pipelines.Tests.csproj", "{C6FCDE5B-2910-4FBD-81E4-2DEEB3133C11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

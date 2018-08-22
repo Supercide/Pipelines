@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using Anderson.Pipelines.Builders;
-using Anderson.Pipelines.Definitions;
-using Anderson.Pipelines.Responses;
+using Andersoft.Pipelines.Builders;
+using Andersoft.Pipelines.Definitions;
 using NUnit.Framework;
 
-namespace Anderson.Pipelines.Tests.Pipelines
+namespace Andersoft.Pipelines.Tests.Pipelines
 {
     public class PipelineTest
     {

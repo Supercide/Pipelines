@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Anderson.Pipelines\Anderson.Pipelines.csproj" />
+    <ProjectReference Include="..\..\src\Anderson.Pipelines\Andersoft.Pipelines.csproj" />
   </ItemGroup>
 
 </Project>

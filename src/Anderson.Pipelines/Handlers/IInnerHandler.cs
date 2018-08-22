@@ -1,4 +1,4 @@
-﻿namespace Anderson.Pipelines.Handlers
+﻿namespace Andersoft.Pipelines.Handlers
 {
     public interface IInnerHandler<TRequest>
     {

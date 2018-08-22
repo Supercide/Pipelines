@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Anderson.Pipelines.Responses;
 
-namespace Anderson.Pipelines.Definitions
+namespace Andersoft.Pipelines.Definitions
 {
 
     public class Context : Dictionary<string, object>

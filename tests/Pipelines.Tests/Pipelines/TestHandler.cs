@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Anderson.Pipelines.Definitions;
+using Andersoft.Pipelines.Definitions;
 
-namespace Anderson.Pipelines.Tests.Pipelines
+namespace Andersoft.Pipelines.Tests.Pipelines
 {
     public class TestHandlerA<TRequest> : TestHandler<TRequest> { }
     public class TestHandlerB<TRequest> : TestHandler<TRequest> { }

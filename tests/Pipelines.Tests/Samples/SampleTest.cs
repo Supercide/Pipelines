@@ -1,11 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Anderson.Pipelines.Builders;
-using Anderson.Pipelines.Definitions;
-using Anderson.Pipelines.Responses;
-using Anderson.Pipelines.Tests.Pipelines;
+using Andersoft.Pipelines.Builders;
+using Andersoft.Pipelines.Definitions;
 using NUnit.Framework;
 
-namespace Anderson.Pipelines.Tests.Samples
+namespace Andersoft.Pipelines.Tests.Samples
 {
     public class SampleTest
     {

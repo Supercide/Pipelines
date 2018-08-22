@@ -1,9 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Anderson.Pipelines.Definitions;
-using Anderson.Pipelines.Responses;
+using Andersoft.Pipelines.Definitions;
 
-namespace Anderson.Pipelines.Tests.Samples
+namespace Andersoft.Pipelines.Tests.Samples
 {
     public class Validation : PipelineDefinition<Order>
     {

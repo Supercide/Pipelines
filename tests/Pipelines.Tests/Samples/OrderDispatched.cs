@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Anderson.Pipelines.Tests.Samples
+namespace Andersoft.Pipelines.Tests.Samples
 {
     public class OrderDispatched
     {

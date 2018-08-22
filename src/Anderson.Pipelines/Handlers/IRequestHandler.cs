@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Anderson.Pipelines.Definitions;
+using Andersoft.Pipelines.Definitions;
 
-namespace Anderson.Pipelines.Handlers
+namespace Andersoft.Pipelines.Handlers
 {
     public interface IRequestHandler<in TRequest>
     {
