@@ -10,7 +10,7 @@ build_script:
 deploy:
   provider: NuGet
   api_key:
-    secure: qbxnPvOYuLuYydN+Nea89J3iQEoVvmzyPKKMqa0DEtorWHYJTlS9cvLXvZsLBlMM
+    secure: mvNzpcczM/UODjMedgzQ38yHswUiD5SvdVvZhqVL32RVek8V+fVJPjVC6fnIKnxi
   skip_symbols: false
 
 artifacts:
