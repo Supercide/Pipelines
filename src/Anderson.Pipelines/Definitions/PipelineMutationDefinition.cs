@@ -1,13 +1,15 @@
-﻿using Anderson.Pipelines.Handlers;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Andersoft.Pipelines.Handlers;
 
-namespace Anderson.Pipelines.Definitions
+namespace Andersoft.Pipelines.Definitions
 {
-    public abstract class PipelineMutationDefinition<TRequest, TMutatedRequest, TResponse> 
-        : IRequestHandler<TRequest, TResponse>, 
-          IInnerHandler<TMutatedRequest, TResponse>
+    public abstract class PipelineMutationDefinition<TRequest, TMutatedRequest> 
+        : IRequestHandler<TRequest>, 
+          IInnerHandler<TMutatedRequest>
     {
-        public IRequestHandler<TMutatedRequest, TResponse> InnerHandler { get; set; }
+        public IRequestHandler<TMutatedRequest> InnerHandler { get; set; }
 
-        public abstract TResponse Handle(TRequest request);
+        public abstract Task HandleAsync(TRequest request, Context context, CancellationToken token);
     }
 }

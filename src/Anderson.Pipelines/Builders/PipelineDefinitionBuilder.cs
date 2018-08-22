@@ -1,16 +1,13 @@
-﻿
-using System;
-using Anderson.Pipelines.Definitions;
-using Anderson.Pipelines.Handlers;
+﻿using System;
+using Andersoft.Pipelines.Definitions;
+using Andersoft.Pipelines.Handlers;
 
-namespace Anderson.Pipelines.Builders
+namespace Andersoft.Pipelines.Builders
 {
     /// <summary>
     /// Helps define your pipeline
     /// </summary>
-    /// <typeparam name="TRoot">This is the Root node that starts the pipeline</typeparam>
-    /// <typeparam name="TResponse">The response which the pipeline produces</typeparam>
-    public class PipelineDefinitionBuilder<TRoot, TResponse>
+    public class PipelineDefinitionBuilder
     {
         private readonly Func<Type, object> _resolveService;
 
@@ -30,10 +27,10 @@ namespace Anderson.Pipelines.Builders
         /// </summary>
         /// <param name="rootDefinition"></param>
         /// <returns></returns>
-        public static PipelineDefinitionBuilder<TRoot, TRoot, TResponse> StartWith(
-            PipelineDefinition<TRoot, TResponse> rootDefinition)
+        public static PipelineDefinitionBuilder<TRoot, TRoot> StartWith<TRoot>(
+            PipelineDefinition<TRoot> rootDefinition)
         {
-            return new PipelineDefinitionBuilder<TRoot, TRoot, TResponse>(rootDefinition)
+            return new PipelineDefinitionBuilder<TRoot, TRoot>(rootDefinition)
             {
                 _root = rootDefinition
             };
@@ -43,11 +40,11 @@ namespace Anderson.Pipelines.Builders
         /// The initial node that begins the pipeline
         /// </summary>
         /// <returns></returns>
-        public PipelineDefinitionBuilder<TRoot, TRoot, TResponse> StartWith<T>() where T : PipelineDefinition<TRoot, TResponse>
+        public PipelineDefinitionBuilder<TRequest, TRequest> StartWith<TPipe, TRequest>() where TPipe : PipelineDefinition<TRequest>
         {
-            PipelineDefinition<TRoot, TResponse> pipe = (PipelineDefinition<TRoot, TResponse>) _resolveService(typeof(T));
+            PipelineDefinition<TRequest> pipe = (PipelineDefinition<TRequest>) _resolveService(typeof(TPipe));
 
-            return new PipelineDefinitionBuilder<TRoot, TRoot, TResponse>(pipe, _resolveService)
+            return new PipelineDefinitionBuilder<TRequest, TRequest>(pipe, _resolveService)
             {
                 _root = pipe
             };
@@ -60,15 +57,15 @@ namespace Anderson.Pipelines.Builders
     /// <typeparam name="TRoot">The root node that is at the start of the pipeline</typeparam>
     /// <typeparam name="TChild">The node next in line</typeparam>
     /// <typeparam name="TResponse">The response which the pipeline produces</typeparam>
-    public class PipelineDefinitionBuilder<TRoot, TChild, TResponse>
+    public class PipelineDefinitionBuilder<TRoot, TChild>
     {
         private readonly Func<Type, object> _resolveService;
-        internal IInnerHandler<TRoot, TResponse> _root;
-        private readonly IInnerHandler<TChild, TResponse> _current;
+        internal IInnerHandler<TRoot> _root;
+        private readonly IInnerHandler<TChild> _current;
 
         internal PipelineDefinitionBuilder(
-            IInnerHandler<TRoot, TResponse> rootDefinition,
-            IInnerHandler<TChild, TResponse> currentDefinition,
+            IInnerHandler<TRoot> rootDefinition,
+            IInnerHandler<TChild> currentDefinition,
             Func<Type, object> resolveService)
         {
             _root = rootDefinition;
@@ -76,12 +73,12 @@ namespace Anderson.Pipelines.Builders
             _resolveService = resolveService;
         }
 
-        internal PipelineDefinitionBuilder(PipelineDefinition<TChild, TResponse> currentDefinition)
+        internal PipelineDefinitionBuilder(PipelineDefinition<TChild> currentDefinition)
         {
             _current = currentDefinition;
         }
 
-        internal PipelineDefinitionBuilder(PipelineDefinition<TChild, TResponse> currentDefinition, Func<Type, object> resolveService) : this(currentDefinition)
+        internal PipelineDefinitionBuilder(PipelineDefinition<TChild> currentDefinition, Func<Type, object> resolveService) : this(currentDefinition)
         {
             _resolveService = resolveService;
         }
@@ -91,11 +88,11 @@ namespace Anderson.Pipelines.Builders
         /// </summary>
         /// <param name="pipe">Defines how requests are handled</param>
         /// <returns></returns>
-        public PipelineDefinitionBuilder<TRoot, TChild, TResponse> ThenWith(
-            PipelineDefinition<TChild, TResponse> pipe)
+        public PipelineDefinitionBuilder<TRoot, TChild> ThenWith(
+            PipelineDefinition<TChild> pipe)
         {
             _current.InnerHandler = pipe;
-            return new PipelineDefinitionBuilder<TRoot, TChild, TResponse>(
+            return new PipelineDefinitionBuilder<TRoot, TChild>(
                 _root, 
                 pipe,
                 _resolveService);
@@ -105,11 +102,11 @@ namespace Anderson.Pipelines.Builders
         /// Adds the next node into the pipeline. Pipelines execute in the order nodes are added
         /// </summary>
         /// <returns></returns>
-        public PipelineDefinitionBuilder<TRoot, TChild, TResponse> ThenWith<T>() where T : PipelineDefinition<TChild, TResponse>
+        public PipelineDefinitionBuilder<TRoot, TChild> ThenWith<T>() where T : PipelineDefinition<TChild>
         {
-            PipelineDefinition<TChild, TResponse> pipe = (PipelineDefinition<TChild, TResponse>)_resolveService(typeof(T));
+            PipelineDefinition<TChild> pipe = (PipelineDefinition<TChild>)_resolveService(typeof(T));
             _current.InnerHandler = pipe;
-            return new PipelineDefinitionBuilder<TRoot, TChild, TResponse>(
+            return new PipelineDefinitionBuilder<TRoot, TChild>(
                 _root,
                 pipe,
                 _resolveService);
@@ -122,11 +119,11 @@ namespace Anderson.Pipelines.Builders
         /// <typeparam name="TMutatedRequest"></typeparam>
         /// <param name="pipe"></param>
         /// <returns></returns>
-        public PipelineDefinitionBuilder<TRoot, TMutatedRequest, TResponse> ThenWithMutation<TMutatedRequest>(
-            PipelineMutationDefinition<TChild, TMutatedRequest, TResponse> pipe)
+        public PipelineDefinitionBuilder<TRoot, TMutatedRequest> ThenWithMutation<TMutatedRequest>(
+            PipelineMutationDefinition<TChild, TMutatedRequest> pipe)
         {
             _current.InnerHandler = pipe;
-            return new PipelineDefinitionBuilder<TRoot, TMutatedRequest, TResponse>(
+            return new PipelineDefinitionBuilder<TRoot, TMutatedRequest>(
                 _root, 
                 pipe,
                 _resolveService);
@@ -139,12 +136,12 @@ namespace Anderson.Pipelines.Builders
         /// <typeparam name="TMutatedRequest"></typeparam>
         /// <typeparam name="TPipe"></typeparam>
         /// <returns></returns>
-        public PipelineDefinitionBuilder<TRoot, TMutatedRequest, TResponse> ThenWithMutation<TPipe, TMutatedRequest>() 
-            where TPipe : PipelineMutationDefinition<TChild, TMutatedRequest, TResponse>
+        public PipelineDefinitionBuilder<TRoot, TMutatedRequest> ThenWithMutation<TPipe, TMutatedRequest>() 
+            where TPipe : PipelineMutationDefinition<TChild, TMutatedRequest>
         {
-            PipelineMutationDefinition<TChild, TMutatedRequest, TResponse> pipe = (PipelineMutationDefinition<TChild, TMutatedRequest, TResponse>)_resolveService(typeof(TPipe));
+            PipelineMutationDefinition<TChild, TMutatedRequest> pipe = (PipelineMutationDefinition<TChild, TMutatedRequest>)_resolveService(typeof(TPipe));
             _current.InnerHandler = pipe;
-            return new PipelineDefinitionBuilder<TRoot, TMutatedRequest, TResponse>(
+            return new PipelineDefinitionBuilder<TRoot, TMutatedRequest>(
                 _root,
                 pipe,
                 _resolveService);
@@ -154,9 +151,9 @@ namespace Anderson.Pipelines.Builders
         /// returns the pipeline
         /// </summary>
         /// <returns></returns>
-        public IRequestHandler<TRoot, TResponse> Build()
+        public IRequestHandler<TRoot> Build()
         {
-            return _root as PipelineDefinition<TRoot, TResponse>;
+            return _root as PipelineDefinition<TRoot>;
         }
     }
 }

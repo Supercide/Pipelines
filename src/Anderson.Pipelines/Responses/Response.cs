@@ -1,4 +1,4 @@
-﻿namespace Anderson.Pipelines.Responses
+﻿namespace Andersoft.Pipelines.Responses
 {
     public class Response<TSuccess, TError>
     {

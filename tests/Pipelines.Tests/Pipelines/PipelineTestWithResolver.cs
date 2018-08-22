@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Anderson.Pipelines.Builders;
+using System.Threading.Tasks;
+using Andersoft.Pipelines.Builders;
+using Andersoft.Pipelines.Definitions;
 using NUnit.Framework;
 
-namespace Anderson.Pipelines.Tests.Pipelines
+namespace Andersoft.Pipelines.Tests.Pipelines
 {
     public class PipelineTestWithResolver
     {
         [Test]
-        public void GivenPiplelineWithThreeStages_WhenHandlingRequest_ThenAllThreeHandlersHandleRequest()
+        public async Task GivenPiplelineWithThreeStages_WhenHandlingRequest_ThenAllThreeHandlersHandleRequest()
         {
             var testHandlerA = new TestHandlerA<TestRequestA>();
             var testHandlerB = new TestHandlerB<TestRequestA>();
@@ -22,15 +24,15 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 [typeof(TestHandlerC<TestRequestA>)] = testHandlerC,
             };
 
-            PipelineDefinitionBuilder<TestRequestA, TestResponse> builder = new PipelineDefinitionBuilder<TestRequestA, TestResponse>(type => dictionary[type]);
+            PipelineDefinitionBuilder builder = new PipelineDefinitionBuilder(type => dictionary[type]);
             
-            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>>()
+            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>, TestRequestA>()
                                   .ThenWith<TestHandlerB<TestRequestA>>()
                                   .ThenWith<TestHandlerC<TestRequestA>>()
                                   .Build();
 
             var testRequest = new TestRequestA();
-            pipeline.Handle(testRequest);
+            await pipeline.HandleAsync(testRequest, new Context());
 
             Assert.Multiple(() =>
             {
@@ -41,7 +43,7 @@ namespace Anderson.Pipelines.Tests.Pipelines
         }
 
         [Test]
-        public void GivenPiplelineWithThreeStages_WhenHandlingRequest_ThenAllThreeHandlersAreCalledInOrder()
+        public async Task GivenPiplelineWithThreeStages_WhenHandlingRequest_ThenAllThreeHandlersAreCalledInOrder()
         {
             var testHandlerA = new TestHandlerA<TestRequestA>();
             var testHandlerB = new TestHandlerB<TestRequestA>();
@@ -54,17 +56,17 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 [typeof(TestHandlerC<TestRequestA>)] = testHandlerC,
             };
 
-            PipelineDefinitionBuilder<TestRequestA, TestResponse> builder = new
-                PipelineDefinitionBuilder<TestRequestA, TestResponse>(type => dictionary[type]);
+            PipelineDefinitionBuilder builder = new
+                PipelineDefinitionBuilder(type => dictionary[type]);
 
-            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>>()
+            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>, TestRequestA>()
                 .ThenWith<TestHandlerB<TestRequestA>>()
                 .ThenWith<TestHandlerC<TestRequestA>>()
                 .Build();
 
             var testRequest = new TestRequestA();
 
-            pipeline.Handle(testRequest);
+            await pipeline.HandleAsync(testRequest, new Context());
 
             var callOrder = new TestHandler<TestRequestA>[]
                 {
@@ -83,7 +85,7 @@ namespace Anderson.Pipelines.Tests.Pipelines
         }
 
         [Test]
-        public void GivenPipelineThatChangesRequest_WhenHandlingRequest_ThenChangesRequestInPipeline()
+        public async Task GivenPipelineThatChangesRequest_WhenHandlingRequest_ThenChangesRequestInPipeline()
         {
             var testHandlerA = new TestHandlerA<TestRequestA>();
             var testHandlerB = new TestHandlerB<TestRequestA>();
@@ -98,11 +100,11 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 [typeof(TestMutationHandler)] = testMutationHandler,
             };
 
-            PipelineDefinitionBuilder<TestRequestA, TestResponse> builder = new
-                PipelineDefinitionBuilder<TestRequestA, TestResponse>(type => dictionary[type]);
+            PipelineDefinitionBuilder builder = new
+                PipelineDefinitionBuilder(type => dictionary[type]);
 
 
-            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>>()
+            var pipeline = builder.StartWith<TestHandlerA<TestRequestA>, TestRequestA> ()
                 .ThenWith<TestHandlerB<TestRequestA>>()
                 .ThenWithMutation<TestMutationHandler, TestRequestB>()
                 .ThenWith<TestHandlerC<TestRequestB>>()
@@ -110,7 +112,7 @@ namespace Anderson.Pipelines.Tests.Pipelines
 
             var testRequest = new TestRequestA();
 
-            pipeline.Handle(testRequest);
+            await pipeline.HandleAsync(testRequest, new Context());
 
             Assert.Multiple(() =>
             {

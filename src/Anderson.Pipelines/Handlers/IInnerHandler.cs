@@ -1,7 +1,7 @@
-﻿namespace Anderson.Pipelines.Handlers
+﻿namespace Andersoft.Pipelines.Handlers
 {
-    public interface IInnerHandler<TRequest, TResponse>
+    public interface IInnerHandler<TRequest>
     {
-        IRequestHandler<TRequest, TResponse> InnerHandler { get; set; }
+        IRequestHandler<TRequest> InnerHandler { get; set; }
     }
 }

@@ -1,41 +1,47 @@
-﻿using Anderson.Pipelines.Builders;
-using Anderson.Pipelines.Responses;
+﻿using System.Threading.Tasks;
+using Andersoft.Pipelines.Builders;
+using Andersoft.Pipelines.Definitions;
 using NUnit.Framework;
 
-namespace Anderson.Pipelines.Tests.Samples
+namespace Andersoft.Pipelines.Tests.Samples
 {
     public class SampleTest
     {
         [Test]
-        public void GivenValidOrder_WhenHandlingOrder_ThenOrderDispatchedIsReturned()
+        public async Task GivenValidOrder_WhenHandlingOrder_ThenOrderDispatchedIsReturned()
         {
-            var pipeline = PipelineDefinitionBuilder<Order, Response<OrderDispatched, OrderError>>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(new Validation())
                 .ThenWith(new OrderDispatchedHandler())
                 .Build();
 
-            var response = pipeline.Handle(new Order
+            var request = new Order
             {
                 Address = "32 north bridge",
                 Amount = 20m,
                 ItemNumber = "12234BDC",
                 Name = "jordan"
-            });
+            };
 
-            Assert.That(response.Success, Is.TypeOf<OrderDispatched>());
+            var context = new Context();
+            await pipeline.HandleAsync(request, context);
+
+            Assert.That(context.GetResponse<OrderDispatched>(), Is.TypeOf<OrderDispatched>());
         }
 
         [Test]
-        public void GivenOrder_WithMissingAddress_WhenHandlingOrder_ThenReturnsOrderValidationError()
+        public async Task GivenOrder_WithMissingAddress_WhenHandlingOrder_ThenReturnsOrderValidationError()
         {
-            var pipeline = PipelineDefinitionBuilder<Order, Response<OrderDispatched, OrderError>>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(new Validation())
                 .ThenWith(new OrderDispatchedHandler())
                 .Build();
 
-            var response = pipeline.Handle(new Order());
+            var context = new Context();
 
-            Assert.That(response.Error, Is.EqualTo(OrderError.Validation));
+            await pipeline.HandleAsync(new Order(), context);
+            var response = context.GetError<OrderError>();
+            Assert.That(response, Is.EqualTo(OrderError.Validation));
         }
     }
 }

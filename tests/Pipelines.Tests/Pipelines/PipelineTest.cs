@@ -1,8 +1,9 @@
 ﻿using System.Linq;
-using Anderson.Pipelines.Builders;
+using Andersoft.Pipelines.Builders;
+using Andersoft.Pipelines.Definitions;
 using NUnit.Framework;
 
-namespace Anderson.Pipelines.Tests.Pipelines
+namespace Andersoft.Pipelines.Tests.Pipelines
 {
     public class PipelineTest
     {
@@ -13,15 +14,15 @@ namespace Anderson.Pipelines.Tests.Pipelines
             var testHandlerB = new TestHandler<TestRequestA>();
             var testHandlerC = new TestHandler<TestRequestA>();
             
-            var pipeline = PipelineDefinitionBuilder<TestRequestA, TestResponse>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(testHandlerA)
                 .ThenWith(testHandlerB)
                 .ThenWith(testHandlerC)
                 .Build();
 
             var testRequest = new TestRequestA();
-
-            pipeline.Handle(testRequest);
+            var context = new Context();
+            pipeline.HandleAsync(testRequest, context);
             Assert.Multiple(() =>
             {
                 Assert.That(testHandlerA._request, Is.EqualTo(testRequest));
@@ -37,15 +38,15 @@ namespace Anderson.Pipelines.Tests.Pipelines
             var testHandlerB = new TestHandler<TestRequestA>();
             var testHandlerC = new TestHandler<TestRequestA>();
 
-            var pipeline = PipelineDefinitionBuilder<TestRequestA, TestResponse>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(testHandlerA)
                 .ThenWith(testHandlerB)
                 .ThenWith(testHandlerC)
                 .Build();
 
             var testRequest = new TestRequestA();
-
-            pipeline.Handle(testRequest);
+            var context = new Context();
+            pipeline.HandleAsync(testRequest, context);
 
             var callOrder = new[]
                 {
@@ -72,7 +73,7 @@ namespace Anderson.Pipelines.Tests.Pipelines
             var testHandlerC = new TestHandler<TestRequestB>();
 
 
-            var pipeline = PipelineDefinitionBuilder<TestRequestA, TestResponse>
+            var pipeline = PipelineDefinitionBuilder
                 .StartWith(testHandlerA)
                 .ThenWith(testHandlerB)
                 .ThenWithMutation(testMutationHandler)
@@ -80,8 +81,8 @@ namespace Anderson.Pipelines.Tests.Pipelines
                 .Build();
 
             var testRequest = new TestRequestA();
-
-            pipeline.Handle(testRequest);
+            var context = new Context();
+            pipeline.HandleAsync(testRequest, context);
 
             Assert.Multiple(() =>
             {

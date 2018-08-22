@@ -11,7 +11,7 @@ var buildVersion            = Argument<string>("buildVersion", "0.1.0");
 var artifacts               = "./artifacts";
 var testResults             = string.Concat(artifacts, "/test-results/");
 var solution                = GetFiles("./**/*.sln").FirstOrDefault();
-var consumable              = GetFiles("./src/**/Anderson.Pipelines.csproj").FirstOrDefault();
+var consumable              = GetFiles("./src/**/*.csproj").FirstOrDefault();
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP
